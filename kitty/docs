@@ -1,0 +1,29 @@
+<super>mouse drag -> tile
+<super>arrow -> tile
+<super>right click -> resize
+
+<C-shift>+ -> increase font
+<C-shift>- -> descrease font
+
+<C-shift>F11 -> full screen
+
+<C-shift>n -> new window 
+<C-shift>q -> close window 
+
+<C-shift>t -> new tab 
+<C-shift>q -> close tab 
+<C-shift>right -> next tab 
+<C-shift>left -> prev tab 
+<C-shift>1..9 -> go to ith tab 
+
+<C-shift>\ -> vertical split 
+<C-shift-CP> -> horizontal split 
+<C-shift>h -> left window 
+<C-shift>l -> right window 
+<C-shift>k -> up window 
+<C-shift>j -> down window
+<C-shift-alt>h -> resize narrower
+<C-shift-alt>l -> resize wider
+<C-shift-alt>k -> resize taller
+<C-shift-alt>j -> resize shorter
+<C-shift>w -> close window
