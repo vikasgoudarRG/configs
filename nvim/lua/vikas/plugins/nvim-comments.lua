@@ -4,7 +4,7 @@ return {
   config = function() 
     require("todo-comments").setup({})
 
-    vim.keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<cr>", { desc = "Find Todos in Telescope" })
+    vim.keymap.set("n", "<leader>pt", "<cmd>TodoTelescope<cr>", { desc = "Find Todos in Telescope" })
   end,
 }
     -- PERF: 

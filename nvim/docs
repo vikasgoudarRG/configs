@@ -1,6 +1,3 @@
--- TODO: Git integration
--- TODO: LazyVim learn
-
 command line
   :source % -> source current file
 

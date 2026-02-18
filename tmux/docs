@@ -1,46 +1,53 @@
-tmux 
+// basic terminal commands
+tmux
 tmux new -s <name>
-<C-b> d -> detach
 tmux ls -> list tmux sessions
 tmux attach -t <session_name>
 tmux rename-session -t <old_name> <new_name>
-tmux kill-session -t <name> 
+tmux kill-session -t <name>
 
-
+<C-b>d -> detach
 <C-b>v -> copy mode  // roam around using vi motions // roamd around using mouse
 
-<C-b>- -> split window horizontal
-<C-b>| -> split window vertical
+// tmux persistence
+<C-b><C-s> -> save session
+<C-b><C-r> -> restore session
 
+// pane commands
+<C-b>- -> open pane down
+<C-b>| -> open pane right
+<C-b>h/j/k/l -> resize pane
+<C-b>m -> toggle maximize pane
+<C-d> -> delete pane
+  // nvim-tmux navigator
+<C-h/j/k/l> pane movment
+
+// window commands
 <C-b>c -> new window
 <C-b>1..9 -> ith window
 <C-b>, -> rename window
 <C-b>n -> next window
 <C-b>p -> prev window
-  
-<C-b>h/j/k/l -> resize pane
-<C-b>m -> toggle maximize pane
 
-<C-d> -> delete pane
 
-tpm
-  <C-b>I -> install packages
-  <C-b>u -> update packages
-  <C-b-alt>u -> delete unused packages
+// tpm
+<C-b>I -> install packages
+<C-b>u -> update packages
+<C-b-alt>u -> delete unused packages
+<C-b>r -> reload tmux config
 
-  <C-b>r -> reload tmux config
 
-nvim-tmux navigator
-  <C-h/j/k/l> pane movment
+// tmux-sessionx
+<C-b>o -> open panel
+  // name enter -> opens session, if new name creates and opens
 
-tmux-sessionx
-  <C-b>o -> open panel
-  name enter -> opens session, if new name creates and opens
-  <alt-backspace> -> delete session
-  <C-r> -> rename
-  <C-w> -> see windows
-  <C-x> -> open .config tree
-  <C-b> -> back to first view
-  <C-t> -> list out sessions and windows
-
+<alt-backspace> -> delete selected session
+<C-u> scroll preview up 
+<C-d> scroll preview down 
+<C-r> -> rename session
+<C-w> -> will display the windows and their previews
+<C-x> -> see ~/.dotfiles/ 
+<C-e> -> will open parent directory and search for local directories to create a session
+<C-b> -> back to first view
+<C-t> -> list out sessions and windows
 
