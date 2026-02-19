@@ -3,15 +3,15 @@
 ## keybinds
 
 - % -> jump between matching braces
-- `*` -> search word under cursor (forward)
-- `#` -> search word under cursor (backward)
+- * -> search word under cursor (forward)
+- # -> search word under cursor (backward)
 - registers
-  - `"[register][action]`
+  - "[register][action]
     - "ay -> Yank current selection into register a.
     - "ap -> Paste the contents of register a.
     - "ad -> Delete into register a.
   - "" -> default register
-  - "\_ -> blackhole register
+  - "_ -> blackhole register
   - "0 -> vim yanks both in default and 0 register, so that if accidental override of " register by d, content still in 0 register
   - "+ -> system clipboard
 
@@ -25,8 +25,8 @@
 - <C-u> -> move up in buffer with cursor centered
 - n -> next search item centered on screen
 - N -> prev search item centered on screen
-- `>` -> indent and dont exit from visual mode - 'v'
-- `<` -> unindent and dont exit from visual mode - 'v'
+- > -> indent and dont exit from visual mode - 'v'
+- < -> unindent and dont exit from visual mode - 'v'
 - <leader>p -> paste over selection and dont override yank - 'v'
 - <leader>d -> delete and dont yank - 'v'
 - x -> in normal mode does not yank character
@@ -55,7 +55,7 @@
 
 > auto load session in cwd if exists (on nvim) if nvim <somefile> or nvim <multiple files>, auto session wont do anything auto save session when close
 > [default changed] dont create session when close if not exists
-> `TODO:` not really sure about this behaviour
+> TODO: not really sure about this behaviour
 > do :qa because otherwise if you do :q for each pane, it will kill the session
 
 ### keybinds

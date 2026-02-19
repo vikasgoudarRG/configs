@@ -8,7 +8,7 @@ return {
 		},
 		config = function()
 			-- import nvim-treesitter configuration engine
-			local treesitter = require("nvim-treesitter.configs")
+			local treesitter = require("nvim-treesitter.config")
 
 			-- configure treesitter
 			treesitter.setup({
