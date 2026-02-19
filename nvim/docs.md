@@ -1,0 +1,316 @@
+# remaps/ defaults
+
+## keybinds
+
+- % -> jump between matching braces
+- `*` -> search word under cursor (forward)
+- `#` -> search word under cursor (backward)
+- registers
+  - `"[register][action]`
+    - "ay -> Yank current selection into register a.
+    - "ap -> Paste the contents of register a.
+    - "ad -> Delete into register a.
+  - "" -> default register
+  - "\_ -> blackhole register
+  - "0 -> vim yanks both in default and 0 register, so that if accidental override of " register by d, content still in 0 register
+  - "+ -> system clipboard
+
+- i[object]-> inner [object]
+- a[object] -> around [object]
+- ]d -> next diagnostic
+- [d -> prev diagnostic
+- J -> move line down in visual selection - 'v'
+- K -> move line up in visual selection - 'v'
+- <C-d> -> move down in buffer with cursor centered
+- <C-u> -> move up in buffer with cursor centered
+- n -> next search item centered on screen
+- N -> prev search item centered on screen
+- `>` -> indent and dont exit from visual mode - 'v'
+- `<` -> unindent and dont exit from visual mode - 'v'
+- <leader>p -> paste over selection and dont override yank - 'v'
+- <leader>d -> delete and dont yank - 'v'
+- x -> in normal mode does not yank character
+- <leader>s -> replace word on cursor
+- <leader>x -> make file executable
+- <leader>to -> new tab
+- <leader>tx -> close tab
+- <leader>tn -> next tab
+- <leader>tp -> prev tab
+- <leader>tf -> open current file in new tab
+- <leader>t1..9 -> open ith tab
+- <C-Up> -> increase window height
+- <C-Down> -> decrease window height
+- <C-Left> -> increase window width
+- <C-Right> -> decrease window width
+- <leader>s= -> equilize pane size
+- <leader>sv -> split window vertically
+- <leader>sh -> split window horizontally
+- <leader>sx -> close pane
+- <leader>so -> close all other panes
+- <leader>fp -> copy file path
+
+# plugins
+
+## auto-session.lua
+
+> auto load session in cwd if exists (on nvim) if nvim <somefile> or nvim <multiple files>, auto session wont do anything auto save session when close
+> [default changed] dont create session when close if not exists
+> `TODO:` not really sure about this behaviour
+> do :qa because otherwise if you do :q for each pane, it will kill the session
+
+### keybinds
+
+- <leader>wf -> session search ui
+  - <C-d> -> delete highlighted session
+- <leader>ws -> session save
+- <leader>wr -> session restore
+- <leader>wd -> session delete
+
+## telescope.lua
+
+### keybinds
+
+> telescope.lua
+
+- <leader>pf -> telescope find files
+- <leader>pgf -> telescope find git files
+- <leader>pcf -> telescope find config files
+- <leader>plg -> telescope find live grep
+- <leader>psg -> telescope find string grep (string under cursor or selection)
+- <leader>ths -> theme switch
+
+## todo-comments.lua
+
+### keybinds
+
+- FIXME:
+
+- TODO:
+
+- HACK:
+
+- WARNING:
+
+- PERFORMANCE:
+
+- NOTE:
+
+- TEST:
+- PASSED:
+- FAILED:
+
+- <leader>pt -> telescope find todo-comments
+- ]t -> next todo
+- [t -> prev todo
+
+## formatting.lua
+
+> formats on save
+> but can also manually format in 'v', 'n' using
+>
+> > <leader>mp -> make pretty
+
+## git.lua
+
+### lazygit
+
+#### keybinds
+
+- <leader>gg -> lazygit ui
+
+### gitsigns
+
+> attaches to only tracked files
+
+#### keybinds
+
+- <leader>]h -> next hunk
+- <leader>[h -> prev hunk
+- <leader>hs -> stage hunk
+- <leader>hb -> window hunk blame
+- <leader>hs -> stage hunk selection -- visual
+- <leader>hr -> reset hunk selection -- visual
+- <leader>hS -> stage buffer
+- <leader>hR -> reset buffer
+- <leader>hp -> preview hunk (to see old)
+- <leader>hi -> preview hunk inline (to see old)
+- <leader>hd -> difference since stage
+- <leader>hD -> difference since commit
+- <leader>hq -> find every single hunk in the file
+- <leader>hQ -> finds every hunk in the Git repo
+- ih -> recognizes hunk as a text object, so can use in motions like diw, yiw, vih... -- visal and normal
+
+## harpoon.lua
+
+### keybinds
+
+- <leader>hh -> harpoon ui (acts as buffer)
+- <leader>ha -> add file
+- <leader>h1..4 -> harpoon jump to ith file
+
+## image-support.lua
+
+### keybinds
+
+- <leader>pi -> paste image
+
+## linting.lua
+
+### keyinds
+
+- <leader>l -> lint manually (does auto on bufenter, bufwritepost, insertleave)
+
+## markdown-preview.lua
+
+### keybinds
+
+- :MarkdownPreview -> live preview on browser
+
+## mini-files.lua
+
+> works like a nvim buffer
+
+### keybinds
+
+- <leader>ee -> open file from cws in ui
+- <leader>ef -> open file in ui
+  - <esc> -> close
+  - <CR> -> go in
+  - L -> go in (+)
+  - '-' -> go out
+  - H -> go out (+)
+  - <BS> -> reset changes
+  - = -> sync changes
+
+## mini-surround.lua
+
+### keybinds
+
+- sa (add) + motion(normal)/selection(visual) + output id -- 'n'/ 'v'
+- sd (delete) + output id
+- sr (replace) + input id (find) + output id (add)
+- sf (find) + input id (find)
+- sh (highlight) + input id (highlight)
+- n/l (next/last) suffixes for forward/backward
+  - surrounding is identified by a single character as both "input" (in delete and replace start, find, and highlight) and "output" (in add and replace end):
+  - 'f' - function call (string of alphanumeric symbols or '\_' or '.' followed by balanced '()'). in "input" finds function call, in "output" prompts user to enter function name.
+  - 't' - tag. in "input" finds tag with same identifier, in "output" prompts user to enter tag name.
+  - all symbols in brackets '()', '[]', '{}', '<>". in "input' represents balanced brackets (open - with whitespace pad, close - without), in "output" - left and right parts of brackets.
+  - '?' - interactive. prompts user to enter left and right parts.
+  - all other single character identifiers (supported by getcharstr()) represent surrounding with identical left and right parts.
+
+## mini-trailspace.lua
+
+### keybinds
+
+- <leader>cw -> clear whitespace
+
+## mini-splitjoin.lua
+
+- sj -> join -- 'n', 'x'
+- sk -> split -- 'n', 'x'
+
+## nvim-cmp.lua
+
+### keybinds
+
+- <C-b> -> scroll docs up
+- <C-f> -> scroll docs down
+- <C-e> -> abort auto complete
+- <C-j> -> next item
+- <C-k> -> prev item
+- <C-y> -> select
+- <CP> -> select
+- <Tab> -> next item or select if only one item
+- <S-Tab> -> prev item
+
+## nvim-ufo.lua
+
+### keybinds
+
+- za -> toggle fold
+- zA -> toggle fold for file
+
+## oil.lua
+
+### keybinds
+
+- '-' -> open oil | go to parent directory
+
+## trouble.lua
+
+### keybinds
+
+- <leader>xw -> workstation diagnostics
+- <leader>xd -> document diagnostics
+- <leader>xl -> loclist toggle (idk what this does)
+- <leader>xq -> quickfix toggle (when telescope search <C-q> saves to a quickfix buffer
+- <leader>xt -> todo toggle
+
+## undotree.lua
+
+### keybinds
+
+- <leader>u -> toggle undo tree
+
+## vim-maximizer
+
+### keybinds
+
+- <leader>sm -> toggle maximize pane
+
+## pop terminal
+
+### keybinds
+
+- <esc><esc> -> puts terminal window in normal mode
+- <leader>c/ -> toggle terminal window
+
+## lsp
+
+### keybinds
+
+- gR -> telescope window showing every single place a function or variable is used
+- gd -> jump to definition of variable/function
+- gD -> jump to declaration
+- gi -> jump to implementation
+- gt -> jump to type definition
+- <leader>vca -> suggested code actions -- 'v' 'n'
+- <leader>rn -> rename variable
+- <leader>D -> buffer diagnostic
+- <leader>d -> current line diagnostic
+- K -> see documentation in a small window
+  - K -> pressing K again moves cursor in that window
+- <C-h> -> see function signature -- 'i'
+- <leader>lx -> toggle virtual ghost diagnostic text of lsp
+- <leader>ll -> toggle behaviour b/w (show lsp diagnostic in all line)/ (show lsp diagnostic in current line when hover)
+
+## treesitter.lua
+
+> nvim grammer [operator][selection][object]
+
+### keybinds for [selection][objecct]
+
+- af -> around function
+- if -> inside function
+- aa -> around argument
+- ia -> inside argument
+- ac -> around class
+- ic -> inside clasee
+- ai -> around condition (if statement)
+- ii -> inside condition (if statement)
+- al -> around loop
+- il -> inside loop
+
+### keybinds
+
+- ]] -> next function start
+- ]c -> next class start
+- ]a -> next argument start
+- ]M -> next function end
+- ]C -> next class end
+- [[ -> prev function start
+- [c -> prev class start
+- [a -> prev argument start
+- [M -> prev function end
+- [C -> prev class end

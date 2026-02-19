@@ -24,23 +24,24 @@ vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "paste over selection and do
 vim.keymap.set({ "v", "x" }, "<leader>d", [["_d]], { desc = "delete to void register (no yank)" })
 vim.keymap.set("n", "x", '"_x', vim.tbl_deep_extend("force", opts, { desc = "no yank when normal mode - x" }))
 
--- lsp
-vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "code formatting" })
-
 -- global search
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-  { desc = "Replace word cursor is on globally" })
+vim.keymap.set(
+	"n",
+	"<leader>s",
+	[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+	{ desc = "Replace word cursor is on globally" }
+)
 
 -- make file executable
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true, desc = "makes file executable" })
 
 -- highlight yank
 vim.api.nvim_create_autocmd("TextYankPost", {
-    desc = "Highlight when yanking (copying) text",
-    group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
-    callback = function()
-        vim.hl.on_yank()
-    end,
+	desc = "Highlight when yanking (copying) text",
+	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+	callback = function()
+		vim.hl.on_yank()
+	end,
 })
 
 -- tab management
@@ -50,7 +51,7 @@ vim.keymap.set("n", "<leader>tn", "<cmd>tabn<CR>", { desc = "go to next tab" })
 vim.keymap.set("n", "<leader>tp", "<cmd>tabp<CR>", { desc = "go to prev tab" })
 vim.keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "open curr in new tab" })
 for i = 1, 9 do
-  vim.keymap.set("n", "<leader>t" .. i, i .. "gt", { desc = "go to tab " .. i })
+	vim.keymap.set("n", "<leader>t" .. i, i .. "gt", { desc = "go to tab " .. i })
 end
 
 -- Window management
@@ -70,13 +71,9 @@ vim.keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally"
 vim.keymap.set("n", "<leader>sx", "<C-w>q", { desc = "Close current window" })
 vim.keymap.set("n", "<leader>so", "<cmd>only<cr>", { desc = "Close all other windows" })
 
-
 -- Copy filepath to the clipboard
 vim.keymap.set("n", "<leader>fp", function()
-  local filePath = vim.fn.expand("%:~") -- Gets the file path relative to the home directory
-  vim.fn.setreg("+", filePath) -- Copy the file path to the clipboard register
-  print("File path copied to clipboard: " .. filePath)
+	local filePath = vim.fn.expand("%:~") -- Gets the file path relative to the home directory
+	vim.fn.setreg("+", filePath) -- Copy the file path to the clipboard register
+	print("File path copied to clipboard: " .. filePath)
 end, { desc = "Copy file path to clipboard" })
-
-
-

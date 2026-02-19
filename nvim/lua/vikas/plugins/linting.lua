@@ -3,27 +3,29 @@ return {
 	event = { "BufReadPre", "BufNewFile" },
 	config = function()
 		local lint = require("lint")
-		local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
-		local eslint = lint.linters.eslint_d
 
-		-- if Eslint error configuration not found : change MasonInstall eslint@version or npm i -g eslint at a specific version
 		lint.linters_by_ft = {
+			go = { "golangcilint" },
+
 			python = { "pylint" },
-      base = { "shellcheck" },
-      dockerfile = { "hadolint" }
+
+			cpp = { "cppcheck" },
+			c = { "cppcheck" },
+
+			dockerfile = { "hadolint" },
+			terraform = { "tflint" },
+			yaml = { "yamllint" },
+
+			bash = { "shellcheck" },
+			sh = { "shellcheck" },
+
+			sql = { "sqlfluff" },
+			json = { "jsonlint" },
+
+			proto = { "protolint" },
 		}
 
-		eslint.args = {
-			"--no-warn-ignored",
-			"--format",
-			"json",
-			"--stdin",
-			"--stdin-filename",
-			function()
-                return vim.fn.expand("%:p")
-			end,
-		}
-
+		local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 		vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
 			group = lint_augroup,
 			callback = function()

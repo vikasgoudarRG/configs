@@ -1,74 +1,132 @@
 return {
-  {
-        "nvim-treesitter/nvim-treesitter",
-        event = { "BufReadPre", "BufNewFile" },
-        build = ":TSUpdate",
-        config = function()
-          -- import nvim-treesitter plugin
-          local treesitter = require("nvim-treesitter")
+	{
+		"nvim-treesitter/nvim-treesitter",
+		event = { "BufReadPre", "BufNewFile" },
+		build = ":TSUpdate",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter-textobjects",
+		},
+		config = function()
+			-- import nvim-treesitter configuration engine
+			local treesitter = require("nvim-treesitter.configs")
 
-          -- configure treesitter
-          treesitter.setup({ -- enable syntax highlighting
-              highlight = {
-                  enable = true,
-                  additional_vim_regex_highlighting = false,
-              },
-              -- enable indentation
-              indent = { enable = true },
+			-- configure treesitter
+			treesitter.setup({
+				-- 1. Syntax Highlighting
+				highlight = {
+					enable = true,
+					additional_vim_regex_highlighting = false,
+				},
 
-              -- ensure these languages parsers are installed
+				-- 2. Indentation
+				indent = { enable = true },
 
+				-- 3. Language Parsers (Your Backend/Infra List)
+				ensure_installed = {
+					-- Backend / Systems
+					"go",
+					"gomod",
+					"gowork",
+					"gosum",
+					"java",
+					"cpp",
+					"c",
+					"rust",
+					"python",
+					"proto",
+					-- Infra / DevOps
+					"dockerfile",
+					"yaml",
+					"toml",
+					"make",
+					"terraform",
+					-- Databases / Data
+					"sql",
+					"json",
+					"json5",
+					"graphql",
+					-- Shell / Scripting
+					"bash",
+					"git_config",
+					"lua",
+					"vim",
+					"vimdoc",
+					"query",
+					-- Docs
+					"markdown",
+					"markdown_inline",
+					"regex",
+				},
 
-              ensure_installed = {
-                  -- Backend languages
-                  "go", "gomod", "gowork", "gosum",
-                  "java",
-                  "cpp", "c",
-                  "rust",
-                  "python",
-                  "proto",
+				-- 4. NEW: Text Objects Module
+				textobjects = {
+					-- Selection: Select blocks of code logically
+					select = {
+						enable = true,
+						lookahead = true, -- Automatically jump forward to find the object
+						keymaps = {
+							-- Functions
+							["af"] = "@function.outer",
+							["if"] = "@function.inner",
+							-- Classes / Structs
+							["ac"] = "@class.outer",
+							["ic"] = "@class.inner",
+							-- Conditionals (if/else)
+							["ai"] = "@conditional.outer",
+							["ii"] = "@conditional.inner",
+							-- Loops (for/while)
+							["al"] = "@loop.outer",
+							["il"] = "@loop.inner",
+							-- Parameters (Arguments)
+							["aa"] = "@parameter.outer", -- includes comma
+							["ia"] = "@parameter.inner", -- just the content
+						},
+					},
 
-                  -- Infra / DevOps
-                  "dockerfile",
-                  "yaml",
-                  "toml",
-                  "make",
-                  "terraform",
+					-- Navigation: Jump between borders
+					move = {
+						enable = true,
+						set_jumps = true, -- save to jump list for Ctrl-o / Ctrl-i
+						goto_next_start = {
+							["]]"] = "@function.outer",
+							["]c"] = "@class.outer",
+							["]a"] = "@parameter.inner",
+						},
+						goto_next_end = {
+							["]M"] = "@function.outer",
+							["]C"] = "@class.outer",
+						},
+						goto_previous_start = {
+							["[["] = "@function.outer",
+							["[c"] = "@class.outer",
+							["[a"] = "@parameter.inner",
+						},
+						goto_previous_end = {
+							["[M"] = "@function.outer",
+							["[C"] = "@class.outer",
+						},
+					},
 
-                  -- Databases / data
-                  "sql",
-                  "json", "json5",
-                  "graphql",
+					-- Swap: Quickly reorder code (like function arguments)
+					swap = {
+						enable = true,
+						swap_next = {
+							["<leader>na"] = "@parameter.inner", -- swap with next argument
+						},
+						swap_previous = {
+							["<leader>pa"] = "@parameter.inner", -- swap with previous argument
+						},
+					},
+				},
+			})
 
-                  -- Shell / scripting
-                  "bash",
-                  "git_config",
-
-                  -- Neovim / editor
-                  "lua", "vim", "vimdoc", "query",
-
-                  -- Docs
-                  "markdown", "markdown_inline",
-                  "regex",
-              },
-
-              incremental_selection = {
-                  enable = true,
-                  keymaps = {
-                      init_selection = "<C-space>",
-                      node_incremental = "<C-space>",
-                      -- scope_incremental = false,
-                      node_decremental = "<C-backspace>",
-                  },
-              },
-          })
-          -- force start treesitter for all filetypes
-          vim.api.nvim_create_autocmd('FileType', {
-              pattern = '*',
-              callback = function()
-                  pcall(vim.treesitter.start)
-              end,
-          })
-      end,
-  },
+			-- Force start treesitter for all filetypes (from your original config)
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "*",
+				callback = function()
+					pcall(vim.treesitter.start)
+				end,
+			})
+		end,
+	},
 }
